@@ -15,15 +15,36 @@ const OuterContainer = styled.div`
   height: 78vh;
 `
 
-const Description = styled.p`
+const Title = styled.p`
   padding: 0;
   margin-bottom: 1rem;
   font-size: 1.4rem;
+  @media (max-width: 425px) {
+    font-size: 1.2rem;
+  }
 `
+
+// const Description = styled.p`
+//   padding: 0;
+//   margin-bottom: 1rem;
+//   font-size: 1.2rem;
+//   @media (max-width: 425px) {
+//     font-size: 1rem;
+//   }
+// `
 
 const NameHeader = styled.h1`
   font-size: 3.5rem;
-  margin-bottom: 0;
+  margin-bottom: 20px;
+  @media (max-width: 425px) {
+    font-size: 2.5rem;
+  }
+`
+
+const Avatar =  styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 `
 
 const LandingBio = () => (
@@ -32,7 +53,10 @@ const LandingBio = () => (
       query LandingSiteTitleQuery {
         site {
           siteMetadata {
+            name
             title
+            description
+            avatarURL
           }
         }
       }
@@ -40,8 +64,9 @@ const LandingBio = () => (
     render={data => (
       <OuterContainer>
         <Container>
-          <NameHeader>{data.site.siteMetadata.title}</NameHeader>
-          <Description>Software Developer</Description>
+          <Avatar src={data.site.siteMetadata.avatarURL} />
+          <NameHeader>{data.site.siteMetadata.name}</NameHeader>
+          <Title>{data.site.siteMetadata.title}</Title>
         </Container>
       </OuterContainer>
     )}
